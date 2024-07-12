@@ -1,0 +1,66 @@
+import random
+
+def snake_water_gun_game():
+    # Define the choices and the rules
+    choices = {
+        'snake': 'water',
+        'water': 'gun',
+        'gun': 'snake'
+    }
+
+    shorthand_choices = {
+        'S': 'snake',
+        'W': 'water',
+        'G': 'gun'
+    }
+
+    # Initialize scores
+    user_score = 0
+    computer_score = 0
+
+    # Number of rounds
+    rounds = 5
+
+    print("Welcome to the Snake Water Gun game!")
+    print("You will be playing 5 rounds against the computer.")
+    print("Choices: snake (S), water (W), gun (G)")
+
+    for _ in range(rounds):
+        user_choice = input("Enter your choice (S/W/G or snake/water/gun): ").capitalize()
+
+        # Map shorthand choices to full words
+        if user_choice in shorthand_choices:
+            user_choice = shorthand_choices[user_choice]
+
+        # Validate user input
+        if user_choice not in choices:
+            print("Invalid choice, please try again.")
+            continue
+
+        # Computer choice
+        computer_choice = random.choice(list(choices.keys()))
+        print(f"Computer chose: {computer_choice}")
+
+        # Determine the winner
+        if user_choice == computer_choice:
+            print("It's a tie!")
+        elif choices[user_choice] == computer_choice:
+            print("You win this round!")
+            user_score += 1
+        else:
+            print("Computer wins this round!")
+            computer_score += 1
+
+        print(f"Score -> You: {user_score} | Computer: {computer_score}")
+
+    # Determine the overall winner
+    print("\nGame Over!")
+    if user_score > computer_score:
+        print("Congratulations, you won the game!")
+    elif user_score < computer_score:
+        print("Computer wins the game! Better luck next time.")
+    else:
+        print("It's a tie! Well played.")
+
+# Start the game
+snake_water_gun_game()
